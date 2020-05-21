@@ -1,0 +1,14 @@
+{
+  "name": "node_rpc",
+  "version": "1.0.0",
+  "description": "rpc practice in node.js",
+  "main": "index.js",
+  "scripts": {},
+  "author": "mrzjd",
+  "license": "ISC",
+  "dependencies": {
+    "debug": "^4.1.1",
+    "mqtt-connection": "^4.0.0",
+    "uuid": "^3.3.2"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "lumos",
+  "version": "1.0.0",
+  "description": "own tech cookbook",
+  "main": "doc/index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "front-end",
+    "cookbook",
+    "docsify"
+  ],
+  "author": "mrzjd",
+  "license": "ISC"
+}

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>迷宫问题-图的深度广度搜索</title>
+    <style>
+        #gamebox{
+            width:100%;
+            background: #aaa;
+            display: flex;
+            flex-direction: column;
+            height:300px;
+        }
+
+        .row {
+            flex:1;
+            display:flex;
+            flex-direction: row;
+        }
+
+        .col {
+            flex:1;
+            background:#fff;
+            margin:2px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            color: #999;
+        }
+
+        .col.end{
+            background: red;
+        }
+
+        .col.start {
+            background: green;
+            border-radius: 50%;
+        }
+
+        .col.block {
+            background:#aaa;
+        }
+
+        .button {
+            width: 100%;
+            height: 40px;
+            line-height: 40px;
+            background: #eee;
+            border: 1px solid #aaa;
+            border-radius: 6px;
+            text-align: center;
+            margin:20px auto;
+            color: #333;
+            font-size: 22px;
+            user-select: none;
+        }
+
+        .button:active {
+            background: #eaeaea;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>迷宫问题-图的深度广度搜索</h1>
+    <div id="gamebox"></div>
+    <div class="button" id="step">查看结果</div>
+    <script src="./mapSearch.js"></script>
+</body>
+</html>

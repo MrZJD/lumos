@@ -1,0 +1,234 @@
+/* 页面元素编写 */
+
+/* 日程tab */
+.mission-box {
+    margin-top: 0.4rem;
+    background: #fff;
+    color: #5c5c5c;
+}
+
+.mission-title {
+    height: 2rem;
+    line-height: 2rem;
+    margin-left: 0.5rem;
+    border-bottom: 1px solid #e9e9e9;
+    display: flex;
+    justify-content: space-between;
+}
+
+.mission-title .brief {
+    color: #db2023;
+    padding-right: 0.2rem;
+}
+
+.mission-title .brief:after {
+    content: '>';
+    color: #a9a9a9;
+    padding: 0px 6px;
+}
+
+.mission-item {
+    height: 3.2rem;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #e9e9e9;
+    margin-left: 0.5rem;
+    position: relative;
+}
+
+.mission-icon {
+    width: 1rem;
+    height: 1rem;
+    background: #e9e9e9;
+}
+
+.mission-info {
+    margin-left: 0.5rem;
+}
+
+.mission-info .name {
+    display: block;
+    font-size: 0.8rem;
+    padding: 0.2rem 0;
+}
+
+.mission-info .time {
+    color: #a8a8a8;
+    display: block;
+}
+
+.mission-statu {
+    position: absolute;
+    height: 100%;
+    right: 0.5rem;
+    line-height: 1.6rem;
+}
+
+.mission-statu span {
+    display: block;
+    height: 1.6rem;
+}
+
+.mission-statu .state {
+    color: #db2023;
+}
+.mission-statu .origin {
+    color: #a8a8a8;
+}
+
+
+.current-time {
+    font-size: 0.8rem;
+    height: 2rem;
+    border-bottom: 1px solid #e8e8e8;
+    margin-left: 0.5rem;
+    line-height: 2rem;
+    color: #db2023;
+}
+
+.current-time .time {
+    margin-left: 1rem;
+}
+
+/* 任务tab */
+.select-box {
+    
+}
+.select-input {
+    height: 1.55rem;
+    display: inline-block;
+    line-height: 1.55rem;
+    color: #0ca3e8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.select-icon {
+    display: inline-block;
+    width: .8rem;
+    height: .8rem;
+    margin-left: .2rem;
+    background: #6a6a6a;
+}
+.select-list-box {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    display: none;
+}
+.select-list {
+    display: inline-block;
+    margin: 0px;
+    list-style: none;
+    padding: 0px;
+    background: #fff;
+    border-radius: 4px;
+}
+.select-item {
+    padding: 0.4rem .8rem;
+    color: #6c6c6c;
+}
+
+.rule-item {
+    border-top: 1px solid #c4c4c4;
+    border-bottom: 1px solid #c4c4c4;
+    background: #fff;
+    color: #8a8a8a;
+}
+.rule-content {
+    padding: 0px 0.75rem;
+    position: relative;
+}
+.rule-title {
+    font-size: 0.8rem;
+    margin: 0.4rem 0px;
+    color: #000;
+}
+.rule-endline {
+    margin: 0.2rem 0px;
+}
+.rule-subtime {
+    margin: 0.4rem 0px;
+}
+.rule-status {
+    position: absolute;
+    right: .75rem;
+    top: 0px;
+    color: #db2023;
+    font-size: .8rem;
+}
+.rule-btns {
+    border-top: 1px solid #c4c4c4;
+    height: 2rem;
+    line-height: 2rem;
+    display: flex;
+}
+.rule-btns span {
+    flex: 1;
+    border-right: 1px solid #c4c4c4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.rule-btns span:last-child {
+    border-right: none;
+}
+.btn-dactive .icon {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.btn-dactive .icon-chat {
+    background-image: url('../images/dongtai.png');
+}
+.btn-dactive .icon-check {
+    background-image: url('../images/wancheng.png');
+}
+
+/* 页面公共 */
+.slogan-box {
+    height: 2.4rem;
+    color: #a8a8a8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slogan-box:before {
+    content: '';
+    display: inline-block;
+    width: 2rem;
+    height: 1px;
+    background: #a8a8a8;
+}
+
+.float-btns-box {
+    position: absolute;
+    bottom: 2.2rem;
+    right: 0.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.float-btns-box span {
+    width: 2.25rem;
+    height: 2.25rem;
+    display: inline-block;
+    color: #fff;
+    font-size: .9rem;
+    text-align: center;
+    line-height: 2.25rem;
+    border-radius: 50%;
+    margin: 0px 0.25rem;
+}
+
+.float-btns-box .date-btn {
+    background: #ff5a5a;
+}
+
+.float-btns-box .sche-add {
+    background-image: url("../images/tianjia.png");
+    background-size: cover;
+}

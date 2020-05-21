@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>WebSocket</title>
+    <style>
+        html, body {
+            margin: 0;
+        }
+        .title {
+            font-size: 16px;
+            padding: 10px;
+            color: #999;
+        }
+        .ly {
+            display: flex;
+            align-items: center;
+        }
+        .room {
+            width: 500px;
+            height: 600px;
+            margin: 0px 10px;
+            border: 1px solid #999;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="title">WebSocket Chatroom</h1>
+    <div class="ly">
+        <iframe class="room" src="./room.html?uid=15801"></iframe>
+        <iframe class="room" src="./room.html?uid=15802"></iframe>
+    </div>
+</body>
+</html>

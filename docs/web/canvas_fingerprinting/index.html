@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>canvas finger printing</title>
+</head>
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fingerprintjs2/2.1.0/fingerprint2.min.js"></script>
+    <script src="./getCanvas.js"></script>
+    <script>
+        function getMurMur (components) {
+            var values = components.map(function (component) { return component.value })
+            var murmur = Fingerprint2.x64hash128(values.join(''), 31)
+            console.log(murmur) // an array of components: {key: ..., value: ...}
+            alert(murmur)
+        }
+
+        if (window.requestIdleCallback) {
+            requestIdleCallback(function () {
+                Fingerprint2.get(getMurMur)
+            })
+        } else {
+            setTimeout(function () {
+                Fingerprint2.get(getMurMur)
+            }, 500)
+        }
+        // console.log(getCanvas())
+    </script>
+</body>
+</html>

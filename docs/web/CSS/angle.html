@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CSS3 实现多边形</title>
+    <style>
+        html, body {
+            color: #fff;
+        }
+
+        .triangle {
+            margin: 0 auto;
+        }
+
+        .triangle-i {
+            width: 130px;
+            height: 200px;
+            overflow: hidden;
+            visibility: hidden;
+        }
+
+        .triangle-a {
+            background: violet;
+            transform: rotate(50deg);
+        }
+
+        .triangle-b {
+            background: rebeccapurple;
+            transform: rotate(-100deg);
+            visibility: visible;
+        }
+
+        .sexangle {
+            margin: 0 auto;
+        }
+
+        .sexangle-i {
+            width: 200px;
+            height: 250px;
+            overflow: hidden;
+            visibility: hidden;
+            position: relative;
+        }
+
+        .sexangle-a {
+            background: red;
+            transform: rotate(120deg);
+        }
+
+        .sexangle-b {
+            background: royalblue;
+            transform: rotate(-60deg);
+        }
+
+        .sexangle-c {
+            background: greenyellow;
+            transform: rotate(-60deg);
+            visibility: visible;
+        }
+
+        .eightangle {
+            margin: 0 auto;
+        }
+
+        .eightangle-i {
+            width: 200px;
+            height: 200px;
+            overflow: hidden;
+            visibility: hidden;
+            position: relative;
+        }
+
+        .eightangle-a {
+            background: red;
+            transform: rotate(45deg);
+        }
+
+        .eightangle-b {
+            background: yellowgreen;
+            transform: rotate(-90deg);
+        }
+
+        .eightangle-c {
+            background: royalblue;
+            transform: rotate(-45deg);
+            visibility: visible;
+        }
+
+        .content {
+            width: 90%;
+            height: 80%;
+            background: #eee;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        
+        .avatar-wrapper {
+            position: relative;
+            margin-top: 20px;
+        }
+
+        .avatar {
+            margin: 0 auto 20px;
+            overflow: hidden;
+            width: 210px;
+            height: 240px;
+        }
+    
+        .avatar-bg .bg-color {
+            width: 100%;
+            height: 100%;
+            transform: rotate(-60deg) skewY(30deg);
+            background-color: #bbbdf3;
+        }
+
+        .avatar-c {
+            position: absolute;
+            top: 0px;
+            left: 50%;
+            transform-origin: center center;
+            transform: translate(-50%) scale(0.95) rotate(60deg);
+        }
+    
+        .avatar-inner {
+            width: 100%;
+            height: 100%;
+            transform: rotate(-60deg) skewY(30deg);
+            overflow: hidden;
+        }
+
+        .headpic {
+            display: block;
+            width: 100%;
+            height: 100%;
+            transform: rotate(0deg) skewY(-30deg);
+            background: #000;
+            color: #fff;
+            font-size: 16px;
+            text-align: center;
+            line-height: 140px;
+        }
+    </style>
+</head>
+<body>
+    <div class="triangle triangle-i triangle-a">
+        <div class="triangle-i triangle-b">
+            <div class="content">我是内容 - 菱形(四边形)</div>
+        </div>
+    </div>
+
+    <div class="sexangle sexangle-i sexangle-a">
+        <div class="sexangle-i sexangle-b">
+            <div class="sexangle-i sexangle-c">
+                <div class="content">我是内容 - 六边形</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="eightangle eightangle-i eightangle-a">
+        <div class="eightangle-i eightangle-b">
+            <div class="eightangle-i eightangle-c">
+                <div class="content">我是内容 - 八边形</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="avatar-wrapper">
+        <div class="avatar avatar-bg">
+            <div class="bg-color"></div>
+        </div>
+        <div class="avatar avatar-c">
+            <div class="avatar-inner">
+                <img class="headpic" :src="ri.headPic" alt="带边框-六边形">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

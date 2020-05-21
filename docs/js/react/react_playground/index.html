@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>React PlayGround</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script src="https://cdn.bootcss.com/react/16.10.2/umd/react.development.js"></script>
+    <script src="https://cdn.bootcss.com/react-dom/16.10.2/umd/react-dom.development.js"></script>
+    <script>
+        const h = React.createElement
+    </script>
+    <script src="./Provider.js"></script>
+    <script src="./Counter.js"></script>
+    <script>
+        /* 模板代码 */
+        class App extends React.PureComponent {
+            render () {
+                return h(Counter)
+            }
+        }
+
+        ReactDOM.render(h(App), document.querySelector('#app'))
+    </script>
+</body>
+</html>

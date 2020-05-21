@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>React PlayGround</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script src="https://cdn.bootcss.com/react/16.10.2/umd/react.development.js"></script>
+    <script src="https://cdn.bootcss.com/react-dom/16.10.2/umd/react-dom.development.js"></script>
+    <script src="https://cdn.bootcss.com/immutable/4.0.0-rc.12/immutable.js"></script>
+    <script>
+        const h = React.createElement
+    </script>
+    <script>
+        /* 模板代码 */
+        class App extends React.PureComponent {
+            constructor (props) {
+                super(props)
+
+                this.state = {
+                    todos: Immutable.List([1, 2, 3])
+                }
+
+                this.add = () => {
+                    // this.setState({
+                    //     'todos[2]': this.state.todos[2]++
+                    // })
+                    // let todos = this.state.todos
+                    // todos = todos.set(2, todos.get(2)+1)
+                    // this.setState({
+                    //     todos
+                    // })
+                    // this.setState(state => {
+                    //     return { ...state, todos: state.todos.set(2, state.todos.get(2)+1) }
+                    // })
+                }
+            }
+
+            render () {
+                // return <div class="todos">
+                //             <div class="todo-i" v-for="ti in todo">{{ti}}</div>
+                //         </div>
+                return h('div', null, h('div', {
+                    className: 'todos'
+                }, this.state.todos.map((val, ind) => h(
+                    'div',
+                    {
+                        className: 'todo-i',
+                        key: ind
+                    },
+                    val
+                ))), h('button', {
+                    onClick: this.add
+                }, 'counter'))
+            }
+        }
+
+        ReactDOM.render(h(App), document.querySelector('#app'))
+    </script>
+</body>
+</html>

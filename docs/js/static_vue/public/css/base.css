@@ -1,0 +1,178 @@
+/* Reset 样式编写 S */
+html, body, p {
+    margin: 0px;
+    font-size: 0.7rem;
+}
+html, body {
+    width: 100%;
+    height: 100%;
+    background: #f0f0f0;
+}
+.page {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+/* Reset 样式编写 E */
+
+/* 组件化样式的集中编写 S */
+
+/* 组件名:header */
+.header {
+    height: 2.2rem;
+    /* background: linear-gradient(#b80422, #fc5657); */
+    box-shadow: 0 1px 1px rgba(0,0,0,0.2);
+    display: flex;
+    color: #fff;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header .title {
+    max-width: 40%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 1rem;
+}
+
+.header .left,
+.header .right {
+    width: 30%;
+    display: flex;
+    align-items: center;
+}
+
+.header .right {
+    justify-content: flex-end;
+}
+
+.header .pic-icon {
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 1.4rem;
+    height: 1.4rem;
+    margin: 0px 0.2rem;
+}
+
+.scan-icon {
+    background: url("../images/saomiao.png");
+}
+.search-icon {
+    background: url("../images/sousuo.png");
+}
+
+/* 组件名 tab */
+.tab-container {
+    min-height: 400px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.tab-header {
+    height: 2rem;
+    line-height: 2rem;
+    display: flex;
+    background: #fff;
+    align-items: center;
+    font-size: 0.8rem;
+    color: #4c4c4c;
+}
+.tab-header-i {
+    padding: 0px 1.2rem;
+    border-bottom: 2px solid #e9e9e9;
+}
+.tab-header-i.active {
+    color: #e50012;
+    border-bottom: 2px solid #e50012;
+}
+
+.tab-header-full .tab-header-i {
+    flex: 1;
+    text-align: center;
+}
+
+.tab-content {
+    flex: 1;
+    white-space: nowrap;
+    width: 100%;
+}
+.tab-content-i {
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+}
+
+/* 组件名calendar-box */
+.calendar-box {
+
+}
+.calendar-header {
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.calendar-week {
+    flex: 1;
+    text-align: center;
+    color: #bababa;
+    font-size: 0.6rem;
+}
+.calendar-body {
+    background: #fff;
+}
+.calendar-row {
+    height: 3.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    overflow: hidden;
+    transition: height .3s ease-out;
+}
+.calendar-day {
+    width: 2.2rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top: 4px;
+}
+.calendar-day.current {
+    width: 2.2rem;
+    height: 2.2rem;
+    background: #ff5a5a;
+    border-radius: 50%;
+    color: #fff;
+}
+.calendar-day.exception:before {
+    content: '';
+    width: 4px;
+    height: 4px;
+    background: #d0021b;
+    border-radius: 50%;
+    position: absolute;
+    margin-top: -28px;
+}
+.calendar-btn {
+    height: 1rem;
+    background: #fff;
+    border-top: 1px solid #e9e9e9;
+    text-align: center;
+}
+.calendar-btn i {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    background-image: url('../images/jiantou.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    transition: transform .4s linear;
+}
+.calendar-btn.active i {
+    transform: rotate(180deg);
+}
+/* 组件化样式的集中编写 E */

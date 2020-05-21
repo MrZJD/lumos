@@ -1,0 +1,21 @@
+<div class="calendar-box">
+    <!-- calendar-header 显示周列表头 -->
+    <div class="calendar-header">
+        <span class="calendar-week" v-if="type==='START_SUN'">日</span>
+        <span class="calendar-week">一</span>
+        <span class="calendar-week">二</span>
+        <span class="calendar-week">三</span>
+        <span class="calendar-week">四</span>
+        <span class="calendar-week">五</span>
+        <span class="calendar-week">六</span>
+        <span class="calendar-week" v-if="type==='START_MON'">日</span>
+    </div>
+    <!-- 日历列表 -->
+    <div class="calendar-body" ref="calendar">
+        <div class="calendar-row" v-for="(week, weekId) in sortDate" :key="weekId">
+            <span :class="['calendar-day', {'current': day === currentDate, 'exception': exception.indexOf(day) > -1}]" v-for="(day, dayId) in week">{{day > -1 ? day : ''}}</span>
+        </div>
+    </div>
+    <!-- 日历隐藏显示按钮 -->
+    <p :class="['calendar-btn', {'active': show}]" @click="toggleVisiable"><i></i></p>
+</div>

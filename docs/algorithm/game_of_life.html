@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Game of Life 生命游戏</title>
+    <style>
+        body {
+            width: 100%;
+            max-width: 740px;
+            margin: 0 auto;
+            padding: 0px 10px 40px;
+            box-sizing: border-box;
+        }
+
+        .panel {
+            display: inline-block;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            margin: 20px auto;
+            border-top: 1px solid #eaeaea;
+            border-left: 1px solid #eaeaea;
+        }
+
+        [class^="row_"] {
+            width: 100%;
+            border-bottom: 1px solid #eaeaea;
+            font-size: 0px;
+        }
+
+        [class^="cell_"] {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border-right: 1px solid #eaeaea;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        [class^="cell_"]:before {
+            content: '';
+            display: block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+
+        [class^="cell_"].status-0:before {
+            background: #eaeaea;
+        }
+
+        [class^="cell_"].status-1:before {
+            background: #41B883;
+        }
+
+        .tips {
+            color: #41B883;
+            margin: 0px;
+            text-align: center;
+        }
+
+        .tips.dead {
+            color: #E80000;
+        }
+
+        .btn {
+            display: block;
+            margin: 16px auto 0;
+            padding: 4px 10px;
+            background: #eaeaea;
+            border-radius: 3px;
+            border: 1px solid #999;
+            color: #333;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .btn:active {
+            opacity: 0.85;
+        }
+
+        .btn-next,
+        .btn-restart {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h2>生命 Game of Life</h2>
+    <h4>规则介绍</h4>
+    <p>给定一个包含 m × n 个格子的面板，每一个格子都可以看成是一个细胞。每个细胞具有一个初始状态 live（1）即为活细胞， 或 dead（0）即为死细胞。每个细胞与其八个相邻位置（水平，垂直，对角线）的细胞都遵循以下四条生存定律：</p>
+    <ul>
+        <li>如果活细胞周围八个位置的活细胞数少于两个，则该位置活细胞死亡；</li>
+        <li>如果活细胞周围八个位置有两个或三个活细胞，则该位置活细胞仍然存活；</li>
+        <li>如果活细胞周围八个位置有超过三个活细胞，则该位置活细胞死亡；</li>
+        <li>如果死细胞周围正好有三个活细胞，则该位置死细胞复活；</li>
+    </ul>
+
+    <div id="panel" class="panel"></div>
+
+    <p class="tips"></p>
+
+    <button class="btn btn-start">开始</button>
+    <button class="btn btn-next">计算下一轮生存状态</button>
+    <button class="btn btn-restart">重新开始</button>
+
+    <script>
+        let $ = document.querySelector.bind(document)
+        let $new = document.createElement.bind(document)
+
+        // 游戏逻辑
+        class LifeGame {
+            constructor (origin) {
+                this.board = origin
+                this.stage = 0 // 轮次
+                this.status = this.check() ? 1 : -1 // -1 死亡 1 正常
+            }
+
+            // 检查棋盘状态
+            check () {
+                for (let x = 0, xlen = this.board.length; x < xlen; x++) {
+                    for (let y = 0, ylen = this.board[x].length; y < ylen; y++) {
+                        if (this.board[x][y] === 1) { // 有存活细胞 则正常
+                            return true
+                        }
+                    }
+                }
+                return false
+            }
+
+            // 计算指定位置的周围细胞数成活数量
+            calcCellNeighbor (x, y) {
+                return [
+                    [x - 1, y - 1],
+                    [x - 1, y],
+                    [x - 1, y + 1],
+                    [x, y - 1],
+                    [x, y + 1],
+                    [x + 1, y - 1],
+                    [x + 1, y],
+                    [x + 1, y + 1]
+                ].reduce((count, [x, y]) => {
+                    if (!this.board[x] || !this.board[x][y]) return count
+                    return count + 1
+                }, 0)
+            }
+
+            newBoard () {
+                return this.board.map(row => {
+                    return []
+                })
+            }
+
+            // 计算生存状态
+            next () {
+                let nextBoard = this.newBoard()
+                this.board.forEach((row, x) => row.forEach((cell, y) => {
+                    let liveCount = this.calcCellNeighbor(x, y)
+                    let status = this.board[x][y]
+                    if (status === 0 && liveCount === 3) { // 复活
+                        nextBoard[x][y] = 1
+                        return
+                    }
+                    if (status === 1) {
+                        if (liveCount < 2 || liveCount > 3) { // 死亡
+                            nextBoard[x][y] = 0
+                            return
+                        }
+                    }
+                    nextBoard[x][y] = status
+                }))
+
+                this.board = nextBoard
+                this.stage++
+                this.status = this.check() ? 1 : -1
+            }
+        }
+
+        // 渲染器
+        function render (target, data) {
+            if (target.className.indexOf('inited') === -1) {
+                // 初始化棋盘
+                data.forEach((row, x) => {
+                    let rowEle = $new('div')
+                    rowEle.className = `row_${x}`
+                    target.appendChild(rowEle)
+                    row.forEach((cell, y) => {
+                        let cellEle = $new('div')
+                        cellEle.className = `cell_${x}_${y}`
+                        rowEle.appendChild(cellEle)
+                    })
+                })
+                target.className += ' inited'
+            }
+
+            // 渲染数据
+            data.forEach(
+                (row, x) => row.forEach(
+                    (cell, y) => {
+                        let c = `.cell_${x}_${y}`
+                        $(c).className = `cell_${x}_${y} status-${cell}`
+                    }
+                )
+            )
+        }
+
+        (function start () {
+            let origin = [
+                [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+                [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+                [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+                [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+                [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+                [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+                [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+                [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+                [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+                [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+            ]
+
+            let game = null
+            let panel = $('#panel')
+            let cellRE = /cell_(\d)_(\d)/
+            let btnStart = $('.btn-start')
+            let btnNext = $('.btn-next')
+            let btnRe = $('.btn-restart')
+            let tips = $('.tips')
+
+            render(panel, origin)
+            $('.tips').innerText = '点击细胞以切换状态，选择合适数量密度的生存细胞'
+
+            function toggleStatus (evt) {
+                let re = cellRE.exec(evt.target.className)
+                if (!re) return
+
+                let x = +re[1]
+                let y = +re[2]
+
+                origin[x][y] = +!origin[x][y] // toggle
+
+                evt.target.className = `cell_${x}_${y} status-${origin[x][y]}`
+            }
+
+            function checkGameStatus () {
+                if (game.status === -1) {
+                    // alert('没有存活细胞，已死亡')
+                    tips.innerText = `存活轮次: ${game.stage} 没有存活细胞 已死亡`
+                    tips.className = 'tips dead'
+                    btnRe.style.display = 'block'
+                    btnNext.style.display = 'none'
+                    return
+                }
+            }
+
+            panel.addEventListener('click', toggleStatus)
+
+            btnStart.addEventListener('click', () => {
+                tips.innerText = '存活轮次: 0'
+                panel.removeEventListener('click', toggleStatus)
+                btnStart.style.display = 'none'
+                btnNext.style.display = 'block'
+                game = new LifeGame(origin)
+
+                checkGameStatus()
+            })
+
+            btnNext.addEventListener('click', () => {
+                game.next()
+                render(panel, game.board)
+                tips.innerText = `存活轮次: ${game.stage}`
+
+                checkGameStatus()
+            })
+
+            btnRe.addEventListener('click', () => {
+                location.reload()
+            })
+        })()
+    </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<div class="page index-page">
+    <div class="header">
+        <div class="left"></div>
+        <div class="title">Test</div>
+        <div class="right">
+            <i class="pic-icon scan-icon"></i>
+            <i class="pic-icon search-icon"></i>
+        </div>
+    </div>
+    <div class="tab-container">
+        <div class="tab-header tab-header-full">
+            <span :class="['tab-header-i', {'active': activei===0}]" @click="swiperTo(0)">1</span>
+            <span :class="['tab-header-i', {'active': activei===1}]" @click="swiperTo(1)">2</span>
+            <span :class="['tab-header-i', {'active': activei===2}]" @click="swiperTo(2)">3</span>
+        </div>
+        <div class="tab-content swiper-container">
+            <div class="swiper-wrapper">
+            </div>
+        </div>
+    </div>
+    <!-- <div class="float-btns-box">
+        <span class="date-btn">今</span>
+        <span class="sche-add"></span>
+    </div> -->
+</div>

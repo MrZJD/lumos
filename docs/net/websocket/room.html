@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>WebSocket Chatroom</title>
+    <style>
+        html, body {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .room-box {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .msg-box {
+            flex: 1;
+            overflow-x: hidden;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            padding: 6px 10px;
+        }
+
+        .msg-tips {
+            margin: 4px auto;
+            max-width: 200px;
+            color: #999;
+            background: #eaeaea;
+            border-radius: 10px;
+            padding: 4px 10px;
+            font-size: 12px;
+        }
+
+        .msg-p {
+            margin-top: 6px;
+        }
+
+        .msg-self {
+            text-align: right;
+        }
+
+        .msg {
+            display: inline-block;
+            max-width: 300px;
+            border-radius: 14px;
+            padding: 4px 10px;
+            font-size: 14px;
+        }
+
+        .msg-other .msg {
+            color: #fff;
+            background: #83d0f2;
+        }
+
+        .msg-self .msg {
+            color: #666;
+            background: #fff;
+            border: 1px solid #eaeaea;
+        }
+
+        .msg-sender {
+            height: 80px;
+            margin: 10px;
+            border: 1px solid #b6b6b6;
+            border-radius: 2px;
+            padding: 10px;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+        .opts {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+        }
+
+        .opts button {
+            width: 60px;
+            height: 28px;
+            line-height: 28px;
+            border-radius: 2px;
+            border: 1px solid #aaa;
+            background: #eaeaea;
+            outline: none;
+        }
+        .opts button:active {
+            background: #d9d9d9;
+        }
+    </style>
+</head>
+<body>
+    <div class="room-box">
+        <div class="msg-box"></div>
+        <div class="msg-sender" contenteditable=""></div>
+        <div class="opts">
+            <button class="enter">进入</button>
+            <button class="sender">发送</button>
+        </div>
+    </div>
+    <script>
+        class ChatRoom {
+            constructor (rid, uid, el) {
+                this.uid = uid;
+                this.rid = rid;
+                this.el = el;
+
+                this.msgbox = el.querySelector('.msg-box') || null;
+                this.inputer = el.querySelector('.msg-sender') || null;
+                this.enter = el.querySelector('.enter') || null;
+                this.sender = el.querySelector('.sender') || null;
+
+                this.socket = null;
+
+                this._initEvents();
+            }
+
+            _initEvents () {
+                this.enter.addEventListener('click', this.enterRoom.bind(this));
+                this.sender.addEventListener('click', () => {
+                    const value = this.inputer.innerText;
+
+                    if (!value) return;
+                    // this._newMsg('self', value);
+                    this.inputer.innerText = '';
+                    this.sendMsg(value);
+                });
+            }
+
+            _initSocket () {
+                this.onOpen && this.socket.addEventListener('open', this.onOpen.bind(this));
+                this.onClose && this.socket.addEventListener('close', this.onClose.bind(this));
+                this.onError && this.socket.addEventListener('error', this.onError.bind(this));
+                this.onMessage && this.socket.addEventListener('message', this.onMessage.bind(this));
+            }
+
+            _newTips (msg) {
+                const tips = document.createElement('div');
+                tips.className = 'msg-tips';
+                tips.innerText = msg;
+
+                this.msgbox.appendChild(tips);
+            }
+
+            _newMsg (target, msg) {
+                const msgEl = document.createElement('div');
+                msgEl.className = 'msg-p msg-' + target;
+                msgEl.innerHTML = `<span class="msg">${msg}</span>`;
+
+                this.msgbox.appendChild(msgEl);
+            }
+
+            // 进入房间
+            enterRoom () {
+                if (this.socket) return;
+                this._newTips('正在进入聊天室');
+                this.socket = new WebSocket('ws://localhost:9001/chat');
+                this._initSocket();
+            }
+
+            // 发送消息
+            sendMsg (msg) {
+                if (!this.socket) return
+                this.socket.send(JSON.stringify({
+                    cmd: 'msg',
+                    data: msg
+                }));
+            }
+
+            // socket hooks
+            onOpen () {
+                this._newTips('已成功进入聊天室');
+                this.socket.send(JSON.stringify({
+                    cmd: 'enter',
+                    data: {
+                        rid: this.rid,
+                        uid: this.uid
+                    }
+                }));
+            }
+
+            onClose () {
+                console.log('close')
+                this._newTips('消息服务已断开');
+                this.socket.close();
+                this.socket = null;
+            }
+
+            onError (err) {
+                console.log('error')
+                this._newTips('消息服务出错: ', err.message);
+                this.socket.close();
+                this.socket = null;
+            }
+
+            onMessage (evt) {
+                const data = JSON.parse(evt.data);
+
+                if (data.cmd === 'sys') {
+                    this._newTips(data.msg);
+                    return;
+                }
+
+                if (data.fromId === this.uid) {
+                    this._newMsg('self', data.msg);
+                } else {
+                    this._newMsg('other', data.msg);
+                }
+            }
+        }
+
+        const search = location.search.slice(1);
+        const query = {}
+        search.split('&').map((kv) => {
+            kv = kv.split('=')
+            query[kv[0].trim()] = kv[1].trim()
+        })
+
+        new ChatRoom('00001', query.uid, document.querySelector('.room-box'));
+    </script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+
+* [编程基础知识及技巧](/basic/)
+* [网络相关](/net/)
+* [JavaScript](/js/)
+* [Web(HTML/CSS)](/web/)
+* [设计模式](/design_pattern/)
+* [开发工具](/tools/)
+* [数据结构与算法](/algorithm/)
+* [其他](/other_area/)
+* [日志](/diary/)

@@ -1,0 +1,23 @@
+{
+  "name": "ioc_di",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "play": "node playground.js",
+    "inject": "node src/injector/index.js",
+    "bearcat": "node src/bearcat/index.js",
+    "pretsc": "./node_modules/.bin/tsc --rootDir src/typescript/",
+    "tsc": "node src/typescript/index.js",
+    "preinversify": "./node_modules/.bin/tsc --rootDir src/inversify/",
+    "inversify": "node src/inversify/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bearcat": "^0.4.29",
+    "inversify": "^5.0.1",
+    "reflect-metadata": "^0.1.13",
+    "typescript": "^3.3.3"
+  }
+}
