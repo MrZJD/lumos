@@ -23,6 +23,12 @@
 
     /* .cover:before { display: none; }
     .cover:after { display: none; } */
+    #app {
+      font-size: 30px;
+      font-weight: lighter;
+      margin: 40vh auto;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
@@ -30,16 +36,18 @@
     <a href="#/">EN</a>
     <a href="#/zh-cn/">中文</a>
   </nav> -->
-  <div data-app id="main"></div>
+  <div data-app id="app">加载中，请稍后...</div>
 
   <script>
     window.$docsify = {
-      el: '#main',
+      el: '#app',
       name: 'lumos',
+      repo: 'https://github.com/MrZJD/lumos',
       coverpage: 'coverpage.md',
       loadSidebar: 'sidebar.md',
       alias: {
-        '/(.*)/.*/sidebar.md': '/$1/sidebar.md'
+        // '/(.*)/.*/sidebar.md': '/$1/sidebar.md' // 三级下目录全部使用二级目录
+        '/.*/sidebar.md': 'sidebar.md'
       },
       search: {
         placeholder: '查找',

@@ -6,6 +6,8 @@
 
 _*文档生成工具使用 [docsify](https://docsify.js.org/)_
 
+_*文档主题 [docsify-themeable](https://github.com/jhildenbiddle/docsify-themeable)_
+
 <br/>
 
 author: mrzjd
