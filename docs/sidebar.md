@@ -30,7 +30,7 @@
   * [rxjs](/app/rxjs/)
   * [tabrisjs](/app/tabrisjs/)
 * [开发工具](/tools/)
+  * [Git](/tools/git/)
 * [数据结构与算法](/algorithm/)
-  * [生命游戏](/algorithm/game_of_life.html#source)
 * [其他](/other_area/)
 * [日志](/diary/)
