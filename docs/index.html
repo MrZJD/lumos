@@ -47,12 +47,16 @@
       loadSidebar: 'sidebar.md',
       alias: {
         // '/(.*)/.*/sidebar.md': '/$1/sidebar.md' // 三级下目录全部使用二级目录
-        '/.*/sidebar.md': 'sidebar.md'
+        '/.*/sidebar.md': 'sidebar.md', // 二级目录 全部使用 一级目录
+        // '/(.*)/.*/sidebar.md': '/$1/sidebar.md', // 三级目录以下全部使用三级目录 
       },
       search: {
         placeholder: '查找',
         noData: '无相关信息'
-      }
+      },
+      noCompileLinks: [
+        '.*#source.*'
+      ]
     }
   </script>
   <script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>

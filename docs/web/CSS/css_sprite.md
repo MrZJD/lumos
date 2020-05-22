@@ -1,3 +1,6 @@
+## CSS Sprite 格式化脚本
+
+```js
 /**
  * https://www.toptal.com/developers/css/sprite-generator
  * CSS代码重新格式化
@@ -19,3 +22,4 @@
         })
         .join('\n')
 })('getSprite', '');
+```

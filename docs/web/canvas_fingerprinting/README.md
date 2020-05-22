@@ -6,3 +6,7 @@
 
 - [fingerprintjs2](https://github.com/Valve/fingerprintjs2)
 - [HTML5 Canvas Fingerprinting](https://browserleaks.com/canvas)
+
+## 实例
+
+[source](/web/canvas_fingerprinting/index.html#source)
