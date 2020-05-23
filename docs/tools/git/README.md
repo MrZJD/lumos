@@ -159,6 +159,8 @@ git commit --amend -a -m # -a 表示加入工作区的文件 否则加入暂存�
 
 ## 5. git flow 工作流
 
+![git flow](https://nvie.com/img/git-model@2x.png)
+
 将分支分为以下几类:
 
 `Production`分支：
@@ -202,5 +204,6 @@ __测试工作：__
 
 * [阮一峰 · git cherry-pick](http://www.ruanyifeng.com/blog/2020/04/git-cherry-pick.html)
 * [git flow](https://github.com/nvie/gitflow)
+* [git flow · A successful Git branching model](https://nvie.com/posts/a-successful-git-branching-model/)
 * [简书 · git commit 规范指南](https://www.jianshu.com/p/201bd81e7dc9?utm_source=oschina-app)
 * [github · commit提交工具commitizen](https://github.com/commitizen/cz-cli)
