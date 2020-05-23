@@ -8,7 +8,12 @@ _*文档生成工具使用 [docsify](https://docsify.js.org/)_
 
 _*文档主题 [docsify-themeable](https://github.com/jhildenbiddle/docsify-themeable)_
 
-<br/>
+## 最近发布
+
+* [【2020-05-23】ByteDance 面试总结](/diary/ByteDance面试总结.md)
+* [【2020-05-22】Git总结](/tools/git/)
+
+---
 
 author: mrzjd
 
