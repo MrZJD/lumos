@@ -137,6 +137,17 @@ git commit --amend -a -m # -a 表示加入工作区的文件 否则加入暂存�
 1. 回退该次合并
 2. 本地合并，本地解决冲突
 
+### 重命名文件时大小写不敏感的问题
+
+> git默认 `git config core.ignorecase false` 大小写不敏感
+
+场景1：`CSS`文件需要重命名为`css`时，`git status`没有变化信息。(不敏感)
+场景2: `branch-a: file.js` `branch-b: File.js` 合并时会重写文件。(敏感)
+
+解决方案：
+1. 使用默认不大小不敏感
+2. 将文件拷贝一份出来 -> `git rm CSS` -> `git add css`
+
 ## 4. 规范问题
 
 > 具体细则根据团队而异
